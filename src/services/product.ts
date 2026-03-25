@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 })
 export class Product {
   private apiUrl = `${environment.apiUrl}/products`;
-
   constructor(private http: HttpClient) { }
 
   // For now use test endpoint (no DB)
