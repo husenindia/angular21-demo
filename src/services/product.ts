@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ProductModel } from '../model/product';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,9 @@ export class Product {
   // For now use test endpoint (no DB)
   getTest() {
     return this.http.get(`${this.apiUrl}/test`, { responseType: 'text' });
+  }
+  getProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(this.apiUrl);
   }
 
 

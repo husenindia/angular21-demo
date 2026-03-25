@@ -1,2 +1,28 @@
-<h2>API Response:</h2>
-<p>{{ message }}</p>
+<h2>Product List</h2>
+
+<p>{{ message$ | async }}</p>
+<ng-container *ngIf="products$ | async as products; else loading">
+
+  <table *ngIf="products.length > 0" border="1">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+
+    <tr *ngFor="let p of products">
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price }}</td>
+    </tr>
+  </table>
+
+  <div *ngIf="products.length === 0">
+    No products found
+  </div>
+
+</ng-container>
+
+<ng-template #loading>
+  Loading...
+</ng-template>
