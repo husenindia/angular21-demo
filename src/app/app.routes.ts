@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { Products } from './products/products';
+import { Home } from './home/home';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'products', pathMatch: 'full'},
+    { path: '', component: Home},
     { path: 'product-list', component: Products }, // default route
 
     
