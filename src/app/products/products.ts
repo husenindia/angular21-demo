@@ -26,11 +26,6 @@ export class Products {
     // SSR + Browser BOTH will call API
     this.products$ = this.productService.getProducts();
 
-    // Optional debug
-    if (isPlatformBrowser(this.platformId)) {
-      // Force refresh again in browser
-      this.products$ = this.productService.getProducts();
-    }
-
+  
   }
 }
