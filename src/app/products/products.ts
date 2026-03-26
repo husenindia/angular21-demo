@@ -20,11 +20,12 @@ export class Products {
 
   ngOnInit() {
     this.message$ = this.productService.getTest();
-  
+    this.loadProducts(); // make sure this runs
+  }
+
+  loadProducts() {
     this.products$ = this.productService.getProducts().pipe(
       catchError(() => of([]))
     );
-
   }
-
 }
