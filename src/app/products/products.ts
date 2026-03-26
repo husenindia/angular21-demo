@@ -29,7 +29,7 @@ export class Products {
     // Optional debug
     if (isPlatformBrowser(this.platformId)) {
       // Force refresh again in browser
-      this.productService.getProducts().subscribe();
+      this.products$ = this.productService.getProducts();
     }
 
   }
