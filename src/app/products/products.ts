@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Product } from '../../services/product';
 import { ProductModel } from '../../model/product';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { catchError, Observable, of } from 'rxjs';
 
 @Component({
@@ -16,20 +16,22 @@ export class Products {
   products$!: Observable<ProductModel[]>;
   loading: boolean = false;
 
-  constructor(private productService: Product) {}
+
+  constructor(private productService: Product, @Inject(PLATFORM_ID) private platformId: Object) {}
+
 
   ngOnInit() {
     this.message$ = this.productService.getTest();
-    this.loadProducts(); // make sure this runs
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadProducts(); 
+    }
+
   }
 
   loadProducts() {
     this.products$ = this.productService.getProducts().pipe(
       catchError(() => of([]))
     );
-    // 🔥 Re-fetch in background after hydration
-    setTimeout(() => {
-      this.products$ = this.productService.getProducts();
-    }, 0);
   }
 }
