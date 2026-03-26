@@ -27,5 +27,9 @@ export class Products {
     this.products$ = this.productService.getProducts().pipe(
       catchError(() => of([]))
     );
+    // 🔥 Re-fetch in background after hydration
+    setTimeout(() => {
+      this.products$ = this.productService.getProducts();
+    }, 0);
   }
 }
