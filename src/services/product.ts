@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { ProductModel } from '../model/product';
 import { environment } from '../environments/environment';
 
@@ -16,7 +16,9 @@ export class Product {
     return this.http.get(`${this.apiUrl}/api/products/test`, { responseType: 'text' });
   }
   getProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(`${this.apiUrl}/api/products`);
+    return this.http.get<ProductModel[]>(`${this.apiUrl}/api/products`).pipe(
+      shareReplay(1) // cache within app lifecycle
+    );;
   }
 
 

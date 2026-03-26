@@ -23,15 +23,13 @@ export class Products {
   ngOnInit() {
     this.message$ = this.productService.getTest();
 
+    // SSR + Browser BOTH will call API
+    this.products$ = this.productService.getProducts();
+
+    // Optional debug
     if (isPlatformBrowser(this.platformId)) {
-      this.loadProducts(); 
+      console.log('Running in browser → API should refetch');
     }
 
-  }
-
-  loadProducts() {
-    this.products$ = this.productService.getProducts().pipe(
-      catchError(() => of([]))
-    );
   }
 }
