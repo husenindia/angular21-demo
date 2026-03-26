@@ -8,15 +8,15 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class Product {
-  private apiUrl = `${environment.apiUrl}/products`;
+  private apiUrl = `${environment.apiUrl}`;
   constructor(private http: HttpClient) { }
 
   // For now use test endpoint (no DB)
   getTest() {
-    return this.http.get(`${this.apiUrl}/test`, { responseType: 'text' });
+    return this.http.get(`${this.apiUrl}/api/products/test`, { responseType: 'text' });
   }
   getProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(this.apiUrl);
+    return this.http.get<ProductModel[]>(`${this.apiUrl}/api/products`);
   }
 
 
