@@ -28,7 +28,8 @@ export class Products {
 
     // Optional debug
     if (isPlatformBrowser(this.platformId)) {
-      console.log('Running in browser → API should refetch');
+      // Force refresh again in browser
+      this.productService.getProducts().subscribe();
     }
 
   }
